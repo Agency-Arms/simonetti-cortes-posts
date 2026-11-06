@@ -1,0 +1,20 @@
+[
+  {
+    "id": "p2-vini",
+    "quando": "2026-11-06T12:00:00.000Z",
+    "pasta": "midia/p2-vini",
+    "aprovado": true
+  },
+  {
+    "id": "p3-gerson",
+    "quando": "2026-11-06T15:00:00.000Z",
+    "pasta": "midia/p3-gerson",
+    "aprovado": true
+  },
+  {
+    "id": "p4-galo",
+    "quando": "2026-11-06T21:00:00.000Z",
+    "pasta": "midia/p4-galo",
+    "aprovado": true
+  }
+]
