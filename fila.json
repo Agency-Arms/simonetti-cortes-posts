@@ -45,6 +45,12 @@
     "id": "p8-cuello",
     "quando": "2026-11-07T18:00:00.000Z",
     "pasta": "midia/p8-cuello",
+    "aprovado": false
+  },
+  {
+    "id": "p14-virada",
+    "quando": "2026-11-07T18:00:00.000Z",
+    "pasta": "midia/p14-virada",
     "aprovado": true
   },
   {
