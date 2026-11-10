@@ -79,67 +79,67 @@
  },
  {
   "id": "p17-elenco",
-  "quando": "2026-11-10T22:40:00.000Z",
+  "quando": "2026-11-10T23:25:00.000Z",
   "pasta": "midia/p17-elenco",
   "aprovado": true
  },
  {
   "id": "p19-culpado",
-  "quando": "2026-11-11T01:00:00.000Z",
+  "quando": "2026-11-11T01:45:00.000Z",
   "pasta": "midia/p19-culpado",
   "aprovado": true
  },
  {
   "id": "p21-finais",
-  "quando": "2026-11-11T03:20:00.000Z",
+  "quando": "2026-11-11T04:05:00.000Z",
   "pasta": "midia/p21-finais",
   "aprovado": true
  },
  {
   "id": "p15-lodi",
-  "quando": "2026-11-11T12:00:00.000Z",
+  "quando": "2026-11-11T12:05:00.000Z",
   "pasta": "midia/p15-lodi",
   "aprovado": true
  },
  {
   "id": "p26-maisjogou",
-  "quando": "2026-11-11T15:00:00.000Z",
+  "quando": "2026-11-11T15:05:00.000Z",
   "pasta": "midia/p26-maisjogou",
   "aprovado": true
  },
  {
   "id": "p20-cassio",
-  "quando": "2026-11-11T21:00:00.000Z",
+  "quando": "2026-11-11T21:30:00.000Z",
   "pasta": "midia/p20-cassio",
   "aprovado": true
  },
  {
   "id": "p25-william",
-  "quando": "2026-11-11T23:20:00.000Z",
+  "quando": "2026-11-12T00:30:00.000Z",
   "pasta": "midia/p25-william",
   "aprovado": true
  },
  {
   "id": "p28-paulinho",
-  "quando": "2026-11-12T01:40:00.000Z",
+  "quando": "2026-11-12T12:05:00.000Z",
   "pasta": "midia/p28-paulinho",
   "aprovado": true
  },
  {
   "id": "p16-artur",
-  "quando": "2026-11-12T12:00:00.000Z",
+  "quando": "2026-11-12T15:05:00.000Z",
   "pasta": "midia/p16-artur",
   "aprovado": true
  },
  {
   "id": "p22-kaio",
-  "quando": "2026-11-12T15:00:00.000Z",
+  "quando": "2026-11-12T18:05:00.000Z",
   "pasta": "midia/p22-kaio",
   "aprovado": true
  },
  {
   "id": "p24-ancelotti",
-  "quando": "2026-11-13T00:00:00.000Z",
+  "quando": "2026-11-13T00:05:00.000Z",
   "pasta": "midia/p24-ancelotti",
   "aprovado": true
  }
