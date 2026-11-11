@@ -11,3 +11,4 @@
 2026-11-11T00:06:43.392Z OK p17-elenco https://www.instagram.com/reel/DflJ3w-TZUg/
 2026-11-11T03:06:48.304Z OK p19-culpado https://www.instagram.com/reel/Dfleeh6ykmW/
 2026-11-11T12:06:27.407Z OK p21-finais https://www.instagram.com/reel/DfmcP1So53j/
+2026-11-11T15:06:36.459Z OK p15-lodi https://www.instagram.com/reel/Dfmw2wZtIWD/
