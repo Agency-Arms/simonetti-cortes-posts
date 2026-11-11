@@ -1,0 +1,40 @@
+name: relogio
+# Relógio do publicador, sem depender do PC nem do cron do GitHub (que falha muito).
+# Um job fica de pé ~5h50, dispara o publicar a cada 10 min e, antes de acabar, dispara a si mesmo.
+# Repo público: minuto de Actions é grátis. O GITHUB_TOKEN pode disparar workflow_dispatch.
+# O grupo de concorrência mantém uma corrente só: se um reserva (cron/PC) entrar na fila, a próxima volta da corrente o substitui.
+# Pra parar o relógio: Actions > relogio > Disable workflow (ou o arquivo PAUSAR, que trava só o publicar).
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "17 */3 * * *" # reserva: reacende a corrente se ela cair
+permissions:
+  actions: write
+  contents: read
+concurrency:
+  group: relogio
+  cancel-in-progress: false
+jobs:
+  relogio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Disparar o publicar a cada 10 min por ~5h50
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          fim=$(( $(date +%s) + 350*60 ))
+          while [ $(date +%s) -lt $fim ]; do
+            gh workflow run publicar.yml --ref main || echo "falhou o disparo $(date -u +%H:%M)"
+            agora=$(date +%s)
+            prox=$(( ((agora - 300)/600 + 1) * 600 + 300 )) # próximo minuto 5, 15, 25... (casa com as filas em hh:05)
+            [ $prox -ge $fim ] && break
+            sleep $(( prox - agora ))
+          done
+      - name: Passar o bastão pra próxima volta
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run relogio.yml --ref main
