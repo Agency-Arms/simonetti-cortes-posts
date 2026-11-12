@@ -16,3 +16,4 @@
 2026-11-11T22:07:21.751Z OK p20-cassio https://www.instagram.com/reel/DfnhAmkTfiB/
 2026-11-12T01:06:52.918Z OK p25-william https://www.instagram.com/reel/Dfn1hR1IYD1/
 2026-11-12T12:06:50.531Z OK p28-paulinho https://www.instagram.com/reel/DfpBCZJBwld/
+2026-11-12T15:06:27.594Z OK p16-artur https://www.instagram.com/reel/DfpVoqFpc_p/
