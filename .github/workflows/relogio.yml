@@ -1,6 +1,6 @@
 name: relogio
 # Relógio do publicador, sem depender do PC nem do cron do GitHub (que falha muito).
-# Um job fica de pé ~5h50, dispara o publicar a cada 10 min e, antes de acabar, dispara a si mesmo.
+# Um job fica de pé ~5h50, dispara o publicar só nos horários da fila e, antes de acabar, dispara a si mesmo.
 # Repo público: minuto de Actions é grátis. O GITHUB_TOKEN pode disparar workflow_dispatch.
 # O grupo de concorrência mantém uma corrente só: se um reserva (cron/PC) entrar na fila, a próxima volta da corrente o substitui.
 # Pra parar o relógio: Actions > relogio > Disable workflow (ou o arquivo PAUSAR, que trava só o publicar).
@@ -19,18 +19,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
-      - name: Disparar o publicar a cada 10 min por ~5h50
+      - name: Disparar o publicar só nos horários de postar
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: |
+          # Rotina: a fila usa 9h, 12h, 18h e 21h de Brasília (12, 15, 21 e 0h UTC). Acorda aos 5, 20 e 40 min dessas horas
+          # (o veto do Telegram é lido na mesma rodada, antes de publicar). Fora disso, dorme.
           fim=$(( $(date +%s) + 350*60 ))
-          while [ $(date +%s) -lt $fim ]; do
-            gh workflow run publicar.yml --ref main || echo "falhou o disparo $(date -u +%H:%M)"
-            agora=$(date +%s)
-            prox=$(( ((agora - 300)/600 + 1) * 600 + 300 )) # próximo minuto 5, 15, 25... (casa com as filas em hh:05)
+          while true; do
+            agora=$(date +%s); prox=""
+            for d in 0 1; do for h in 12 15 21 0; do for m in 5 20 40; do
+              t=$(date -u -d "$(date -u -d "@$agora" +%F) +$d day $h:$m" +%s)
+              [ $t -gt $agora ] && { [ -z "$prox" ] || [ $t -lt $prox ]; } && prox=$t
+            done; done; done
             [ $prox -ge $fim ] && break
-            sleep $(( prox - agora ))
+            echo "dorme até $(date -u -d "@$prox" +%H:%M) UTC"; sleep $(( prox - agora ))
+            gh workflow run publicar.yml --ref main || echo "falhou o disparo $(date -u +%H:%M)"
           done
       - name: Passar o bastão pra próxima volta
         if: always()
