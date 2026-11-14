@@ -18,6 +18,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Veto pelo Telegram
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT: ${{ secrets.TELEGRAM_CHAT }}
+        run: node veto.mjs
       - name: Publicar o que venceu
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
@@ -32,10 +37,10 @@ jobs:
       - name: Registrar o que saiu
         if: always()
         run: |
-          if [ -n "$(git status --porcelain publicados.json log.txt respondidos.json)" ]; then
+          if [ -n "$(git status --porcelain publicados.json log.txt respondidos.json fila.json)" ]; then
             git config user.name "publicador-simonetti-cortes"
             git config user.email "matheus@emploia.com.br"
-            git add publicados.json log.txt
+            git add publicados.json log.txt fila.json
             [ -f respondidos.json ] && git add respondidos.json
             git commit -m "publicados: $(date -u +%Y-%m-%dT%H:%MZ)"
             for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done

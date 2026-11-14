@@ -32,6 +32,7 @@ const TETO_STORIES_24H = Number(process.env.TETO_STORIES_24H || 6); // stories n
 const arquivoLocal = "C:/Users/Mathe/.claude/secrets/ig-simonetti-cortes.env";
 const local = existsSync(arquivoLocal) ? Object.fromEntries(readFileSync(arquivoLocal, "utf8").split(/\r?\n/).filter((l) => /^\w+=/.test(l)).map((l) => [l.slice(0, l.indexOf("=")), l.slice(l.indexOf("=") + 1).trim()])) : {};
 const env = (k) => process.env[k] || local[k] || "";
+const MIDIA = (env("MIDIA_FABRICA_URL") || "https://agency-arms.github.io/simonetti-cortes-midia").replace(/\/$/, "");
 const BASE = (env("MEDIA_BASE_URL") || "https://agency-arms.github.io/simonetti-cortes-posts").replace(/\/$/, "");
 
 const ler = (f, pad) => (existsSync(f) ? JSON.parse(readFileSync(f, "utf8")) : pad);
@@ -49,6 +50,8 @@ async function g(path, params = {}, method = "GET") {
 // item: { id, quando: ISO, pasta: "midia/...", aprovado: true }
 function midia(item) {
   // story: item.arquivo aponta um .jpg ou .mp4 · sai como STORIES (a API não põe figurinha de link)
+  // corte da fábrica: vídeo no repo de mídia (simonetti-cortes-midia, sem histórico) e legenda na própria fila
+  if (item.video) return { tipo: "reel", video: encodeURI(`${MIDIA}/${item.video}`), capa: item.capa ? encodeURI(`${MIDIA}/${item.capa}`) : null, legenda: item.legenda };
   if (item.arquivo) { const u = encodeURI(`${BASE}/${item.arquivo}`); return item.arquivo.endsWith(".mp4") ? { tipo: "story", video: u, legenda: "" } : { tipo: "story", fotos: [u], legenda: "" }; }
   const p = join(RAIZ, item.pasta);
   const f = readdirSync(p);
@@ -118,7 +121,7 @@ if (cmd === "check") {
 // 6) Story não tem legenda: antes de publicar, lê os stories no ar. Se existe um story que a gente não registrou,
 //    publicado depois do horário deste item, assume que é ele (registro perdido) e NÃO repete: fica pra conferir.
 const norm = (t) => (t || "").normalize("NFC").replace(/\s+/g, " ").trim().slice(0, 180);
-const chave = (x) => (x.arquivo ? x.arquivo + (x.rodada ? "#" + x.rodada : "") : x.pasta); // rodada: republicação aprovada do mesmo arquivo
+const chave = (x) => (x.arquivo ? x.arquivo + (x.rodada ? "#" + x.rodada : "") : x.video || x.pasta); // rodada: republicação aprovada do mesmo arquivo
 const okPorPasta = new Set(Object.entries(feitos).filter(([, v]) => v.status === "ok").map(([k]) => chave(fila.find((x) => x.id === k) || {})).filter(Boolean));
 const tentativas = (x) => feitos[x.id]?.tentativas || 0;
 const elegivel = (x) => x.aprovado && !okPorPasta.has(chave(x)) && (!feitos[x.id] || (feitos[x.id].status === "erro" && tentativas(x) < 3) || (feitos[x.id].status === "publicando" && !x.arquivo));
