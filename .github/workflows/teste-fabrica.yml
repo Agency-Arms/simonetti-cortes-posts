@@ -1,0 +1,49 @@
+name: teste-fabrica
+# Teste de viabilidade da fábrica de cortes: o GitHub consegue baixar do YouTube com a voz original e transcrever?
+on:
+  workflow_dispatch:
+    inputs:
+      video:
+        description: id do vídeo no YouTube
+        default: _904icIOksw
+permissions:
+  contents: read
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar
+        run: |
+          sudo apt-get -qq update && sudo apt-get -qq install -y ffmpeg > /dev/null
+          pip -q install -U yt-dlp faster-whisper
+          nproc; free -g
+      - name: Listar faixas de áudio
+        run: yt-dlp --js-runtimes node -F "https://www.youtube.com/watch?v=${{ inputs.video }}" 2>&1 | grep -iE "audio only|ERROR|Sign in|bot" | head -20
+      - name: Baixar com a voz original
+        run: |
+          inicio=$(date +%s)
+          yt-dlp --js-runtimes node -q --no-warnings \
+            -f "bv*[height<=1080][ext=mp4]+ba[ext=m4a][format_note*=original]/bv*[height<=1080]+ba[format_note*=original]/bv*[height<=1080]+ba[language^=pt][format_note!*=dubbed]" \
+            --merge-output-format mp4 -o bruto.mp4 "https://www.youtube.com/watch?v=${{ inputs.video }}"
+          ls -la bruto.mp4; echo "download: $(( $(date +%s) - inicio )) s"
+          ffprobe -v error -show_entries format=duration -of csv=p=0 bruto.mp4
+      - name: Idioma e tempo de transcrição (5 min do vídeo)
+        run: |
+          ffmpeg -v error -ss 120 -t 300 -i bruto.mp4 -vn -ac 1 -ar 16000 janela.wav
+          python - <<'EOF'
+          import time
+          from faster_whisper import WhisperModel
+          t=time.time(); m=WhisperModel("small", device="cpu", compute_type="int8")
+          segs,info=m.transcribe("janela.wav", word_timestamps=True, vad_filter=True)
+          txt=" ".join(s.text for s in segs)
+          print("idioma", info.language, round(info.language_probability,2))
+          print("5 min transcritos em", round(time.time()-t), "s")
+          print(txt[:300])
+          EOF
