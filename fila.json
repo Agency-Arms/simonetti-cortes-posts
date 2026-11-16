@@ -166,5 +166,17 @@
   "fabrica": true,
   "nota": 8,
   "motivo": "Vini é o tema que mais puxou atenção (reel dele com 94 mil); ângulo da comparação com o Messi é inédito no feed dele"
+ },
+ {
+  "id": "p33-fagner",
+  "quando": "2026-11-16T21:05:00.000Z",
+  "video": "p33-fagner/reel.mp4",
+  "capa": "p33-fagner/capa.jpg",
+  "legenda": "Fagner tem 37 anos e contrato só até dezembro. O Cruzeiro deve renovar? Análise do @simonettianalises",
+  "fonte": "UwoZICiYUoM",
+  "aprovado": true,
+  "fabrica": true,
+  "nota": 7,
+  "motivo": "Renovação do Fagner segue indefinida (decisão depois do Brasileirão); veredito claro com nome conhecido e inédito no feed dele e no nosso"
  }
 ]
