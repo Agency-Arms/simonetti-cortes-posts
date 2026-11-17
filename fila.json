@@ -202,5 +202,17 @@
   "fabrica": true,
   "nota": 7,
   "motivo": "Final da Sul-Americana contra o Boca é esta semana e os comentários do vídeo pedem Fred, Reinier e Bernard; número do Borbas pede veredito e o Felipe não postou"
+ },
+ {
+  "id": "p37-singapura",
+  "quando": "2026-11-18T00:05:00.000Z",
+  "video": "p37-singapura/reel.mp4",
+  "capa": "p37-singapura/capa.jpg",
+  "legenda": "Os 2 piores rivais do Brasil em 20 anos vieram nessa data FIFA. O 7 a 0 vale alguma coisa? Análise do @simonettianalises",
+  "fonte": "tlMSHFzn72c",
+  "aprovado": true,
+  "fabrica": true,
+  "nota": 8,
+  "motivo": "jogo de ontem, assunto quente nos comentários (amistoso fraco da CBF), abre já com a conclusão e pede veredito"
  }
 ]
