@@ -214,5 +214,29 @@
   "fabrica": true,
   "nota": 8,
   "motivo": "jogo de ontem, assunto quente nos comentários (amistoso fraco da CBF), abre já com a conclusão e pede veredito"
+ },
+ {
+  "id": "p38-troca",
+  "quando": "2026-11-18T12:05:00.000Z",
+  "video": "p38-troca/reel.mp4",
+  "capa": "p38-troca/capa.jpg",
+  "legenda": "Matheuzinho no Grêmio e Villasanti no Cruzeiro. Você faria essa troca? Análise do @simonettianalises",
+  "fonte": "IaHs-i1xkUw",
+  "aprovado": true,
+  "fabrica": true,
+  "nota": 7,
+  "motivo": "mercado com dois clubes grandes, proposta concreta, veredito sim ou não, ninguém postou"
+ },
+ {
+  "id": "p39-reformulacao",
+  "quando": "2026-11-18T15:05:00.000Z",
+  "video": "p39-reformulacao/reel.mp4",
+  "capa": "p39-reformulacao/capa.jpg",
+  "legenda": "Saem 20, chegam 18. O Cruzeiro precisa de reformulação ou só de ajuste? Análise do @simonettianalises",
+  "fonte": "IaHs-i1xkUw",
+  "aprovado": true,
+  "fabrica": true,
+  "nota": 7,
+  "motivo": "opinião contra a torcida do Cruzeiro, gancho forte (me assusta), fim de temporada e planejamento de 2027 em alta"
  }
 ]
