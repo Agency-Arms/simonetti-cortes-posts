@@ -238,5 +238,17 @@
   "fabrica": true,
   "nota": 7,
   "motivo": "opinião contra a torcida do Cruzeiro, gancho forte (me assusta), fim de temporada e planejamento de 2027 em alta"
+ },
+ {
+  "id": "p41-pontofraco",
+  "quando": "2026-11-19T00:05:00.000Z",
+  "video": "p41-pontofraco/reel.mp4",
+  "capa": "p41-pontofraco/capa.jpg",
+  "legenda": "O ponta do Boca quase não volta pra marcar. O Galo tem que atacar por esse lado na final? Análise do @simonettianalises",
+  "fonte": "Uge_1gDNYi0",
+  "aprovado": true,
+  "fabrica": true,
+  "nota": 7,
+  "motivo": "véspera da final; aponta onde o Galo pode ferir o Boca, na lousa, com nome de jogador"
  }
 ]
